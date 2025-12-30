@@ -25,13 +25,23 @@
                             </div>
                             
                             <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email *</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                       id="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
+                                <label for="username" class="form-label">Usuario *</label>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" 
+                                       id="username" name="username" value="{{ old('username') }}" required>
+                                @error('username')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <small class="text-muted">Solo letras, números y guiones bajos</small>
                             </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                                   id="email" name="email" value="{{ old('email') }}" required>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         
                         <div class="row">

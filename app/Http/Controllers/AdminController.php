@@ -73,6 +73,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users|regex:/^[a-zA-Z0-9_]+$/',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:admin,user',
@@ -82,6 +83,7 @@ class AdminController extends Controller
         try {
             $user = $this->userRepository->create([
                 'name' => $request->name,
+                'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
@@ -116,6 +118,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id . '|regex:/^[a-zA-Z0-9_]+$/',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'role' => 'required|in:admin,user',
             'quota_gb' => 'required|numeric|min:1',
@@ -125,6 +128,7 @@ class AdminController extends Controller
         try {
             $this->userRepository->update($user, [
                 'name' => $request->name,
+                'username' => $request->username,
                 'email' => $request->email,
                 'role' => $request->role,
                 'is_active' => $request->is_active,
